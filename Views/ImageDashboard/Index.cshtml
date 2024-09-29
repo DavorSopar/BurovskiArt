@@ -1,0 +1,44 @@
+﻿@model List<ArtistPortfolio.Models.Models.Image>
+@{
+    ViewData["Title"] = "Админ - Галерија";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="d-flex my-3">
+    <a class="btn btn-primary btn-sm" asp-action="AddImage" asp-controller="ImageDashboard">Додади уметничко дело</a>
+</div>
+
+<table class="table table-responsive align-middle">
+    <thead>
+        <tr>
+            <th>Наслов</th>
+            <th>Се продава</th>
+            <th>Техника</th>
+            <th>Формат</th>
+            <th>Акции</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach (var image in Model)
+        {
+            <tr>
+                <td><a asp-controller="ImageDashboard" asp-action="ImageDetail" asp-route-id="@image.Id" class="text-uppercase">@image.TitleMK</a></td>
+                <td>@(image.IsForSale ? "Да" : "Не")</td>
+                <td>@image.TechniqueMK</td>
+                <td>@image.Format</td>
+                <td>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a asp-controller="ImageDashboard" asp-action="ImageDetail" asp-route-id="@image.Id" class="btn btn-sm btn-outline-secondary">Детали</a>
+                            <a asp-controller="ImageDashboard" asp-action="UpdateImage" asp-route-id="@image.Id" class="btn btn-sm btn-outline-secondary">Измени</a>
+                        </div>
+                        <form asp-controller="ImageDashboard" asp-action="DeleteImage" style="padding-left: 15px;">
+                            <input type="hidden" name="id" value="@image.Id">
+                            <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

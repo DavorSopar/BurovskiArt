@@ -1,0 +1,83 @@
+﻿@model ArtistPortfolio.Models.Models.Image
+
+@{
+    ViewData["Title"] = "Админ - Измени уметничко дело";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h3>Се изменува сликата: @Model.TitleMK</h3>
+<form class="form" asp-action="UpdateImage" asp-controller="ImageDashboard" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group mb-3">
+        <label asp-for="TitleMK">Наслов (македонски):</label>
+        <input type="text" asp-for="TitleMK" class="form-control">
+        <span asp-validation-for="TitleMK" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="TitleEN" class="form-label">Наслов (англиски):</label>
+        <input type="text" asp-for="TitleEN" class="form-control mb-1">
+        <span asp-validation-for="TitleEN" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="DescMK" class="form-label">Опис (македонски):</label>
+        <textarea class="form-control" asp-for="DescMK" rows="3"></textarea>
+        <span asp-validation-for="DescMK" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="DescEN" class="form-label">Опис (англиски):</label>
+        <textarea class="form-control" asp-for="DescEN" rows="3"></textarea>
+        <span asp-validation-for="DescEN" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="TechniqueMK" class="form-label">Техника (македонски)</label>
+        <input type="text" asp-for="TechniqueMK" class="form-control">
+        <span asp-validation-for="TechniqueMK" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="TechniqueEN" class="form-label">Техника (англиски)</label>
+        <input type="text" asp-for="TechniqueEN" class="form-control">
+        <span asp-validation-for="TechniqueEN" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Format" class="form-label">Формат</label>
+        <input type="text" asp-for="Format" class="form-control" placeholder="40x30">
+        <span asp-validation-for="Format" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Price" class="form-label">Цена во денари</label>
+        <input type="number" asp-for="Price" class="form-control"/>
+    </div>
+
+    <div class="form-group mb-3">
+        <div class="form-check">
+            <input class="form-check-input" asp-for="IsForSale" id="ForSale" type="radio" name="IsForSale" value="true">
+            <label class="form-check-label" asp-for="IsForSale" for="ForSale">
+                Се продава
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" asp-for="IsForSale" id="NotForSale" type="radio" name="IsForSale" value="false">
+            <label class="form-check-label" asp-for="IsForSale" for="NotForSale">
+                Не се продава
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="ImageFile" class="form-label">Слика:</label>
+        <input asp-for="ImageFile" class="form-control">
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-danger me-2" asp-controller="ImageDashboard" asp-action="Index">Назад</a>
+            <button type="submit" class="btn btn-success">Потврди измена</button>
+        </div>
+    </div>
+</form>

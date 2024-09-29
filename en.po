@@ -1,0 +1,29 @@
+﻿msgid "Галерија"
+msgstr "Gallery"
+
+msgid "Експонати"
+msgstr "Exhibits"
+
+msgid "Контакт"
+msgstr "Contact"
+
+msgid "Биографија"
+msgstr "Biography"
+
+msgid "буровскиАрт"
+msgstr "burovskiArt"
+
+msgid "Биографија"
+msgstr "Biography"
+
+msgid "Логирај се"
+msgstr "Log in"
+
+msgid "Одлогирај се"
+msgstr "Log out"
+
+msgid "Регистрирај се"
+msgstr "Register"
+
+msgid "Добредојде"
+msgstr "Welcome"

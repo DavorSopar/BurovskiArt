@@ -1,0 +1,25 @@
+﻿@model ArtistPortfolio.Models.DTO.ManageIndexDTO
+@{
+    ViewData["Title"] = "Поставки";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<p class="text-success">@ViewData["StatusMessage"]</p>
+
+<div>
+    <h1>Поставки</h1>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Лозинка:</dt>
+        <dd>
+            @if (Model.HasPassword)
+            {
+                <text>[&nbsp;&nbsp;<a class="btn btn-link" asp-controller="Manage" asp-action="ChangePassword">Промени</a>&nbsp;&nbsp;]</text>
+            }
+            else
+            {
+                <text>[&nbsp;&nbsp;<a asp-controller="Manage" asp-action="SetPassword">Постави</a>&nbsp;&nbsp;]</text>
+            }
+        </dd>
+    </dl>
+</div>

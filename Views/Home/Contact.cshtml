@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = @Localizer["Контакт"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section my-5 px-2">
+    <div class="row">
+        <div class="col-sm-12 col-md-5">
+            <div class="text-center">
+                <img src="~/images/contactImg.jpg" class="img-responsive w-75" alt="Martin Burovski">
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            @if (CultureInfo.CurrentCulture.Name == "en-US")
+            { 
+                <h2 class="mb-3"><strong>Contact Information</strong></h2>
+                <hr />
+                <p class="text-start">For all information send me an email or message. We accept orders from these styles and genres.</p>
+                <h4>Martin Burovski</h4>
+                <div class="mt-4">
+                    <p>Phone Number:</p>
+                    <p class="text-primary">+389 79 224 592</p>
+                </div>
+                <div class="mb-4">
+                    <p>E-Mail Address:</p>
+                        <a class="text-primary" href="mailto: martin_burovski@hotmail.com">martin_burovski@hotmail.com</a>
+                </div>
+                <div>
+                    <p>Instagram:</p>
+                    <a class="text-primary" href="https://www.instagram.com/burovski.art/?hl=en" target="_blank">burovski.art</a>
+                </div>
+            }
+            else
+            {
+                <h2 class="mb-3"><strong>Информации за контакт</strong></h2>
+                <hr />
+                <p class="text-start">За сите информации испратете ми  емаил или порака. Примаме нарачки од овие стилови и жанрови.</p>
+                <h4>Мартин Буровски</h4>
+                <div class="mt-4">
+                    <p>Телефонски број:</p>
+                    <p class="text-primary">+389 79 224 592</p>
+                </div>
+                <div class="mb-4">
+                    <p>Електронска пошта:</p>
+                    <a class="text-primary" href="mailto: abc@example.com">martin_burovski@hotmail.com</a>
+                </div>
+                <div>
+                    <p>Инстаграм:</p>
+                    <a class="text-primary" href="https://www.instagram.com/burovski.art/?hl=en" target="_blank">burovski.art</a>
+                </div>
+            }
+        </div>
+    </div>
+</section>

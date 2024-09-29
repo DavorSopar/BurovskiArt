@@ -1,0 +1,48 @@
+﻿@model ArtistPortfolio.Models.Models.Image
+
+@{
+    ViewData["Title"] = "Админ - Детали за уметничко дело";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<section class="section my-5 px-2">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="my-3 text-center border border-0">
+                <div class="">
+                    <img src="~/images/@Model.ImageUrl" class="img-fluid w-75 img-box-shadow">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <div class="my-3 border border-0">
+                <h5 class="text-start">@Model.TitleMK / @Model.TitleEN</h5>
+                <hr />
+                <div class="detail-body">
+                    <div class="d-flex flex-column">
+                        <span><strong>Формат:</strong> @Model.Format цм</span>
+                        <span><strong>Техника:</strong> @Model.TechniqueMK / @Model.TechniqueEN</span>
+                    </div>
+                    <div class="my-4">
+                        <p>
+                            <strong>Македонски јазик: </strong>@Model.DescMK
+                        </p>
+                        <p>
+                            <strong>Англиски јазик: </strong>@Model.DescEN
+                        </p>
+                    </div>
+
+                </div>
+                <div class="d-flex flex-row justify-content-end">
+                    <div class="btn-group">
+                        <a asp-controller="ImageDashboard" asp-action="Index" class="btn btn-sm btn-outline-secondary">Назад</a>
+                        <a asp-controller="ImageDashboard" asp-action="UpdateImage" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-secondary">Измени</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+

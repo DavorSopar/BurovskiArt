@@ -1,0 +1,68 @@
+﻿@model List<ArtistPortfolio.Models.Models.Image>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = @Localizer["Галерија"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section my-3">
+    <div class="text-center py-4 mb-4">
+        <h3>@Localizer["Галерија"]</h3>
+        <hr />
+    </div>
+
+    <div class="row">
+        @foreach (var image in Model)
+        {
+                <div class="col-md-4 col-sm-4 col-xs-4 text-center image-container">
+                    <a class="image-title text-uppercase" asp-controller="Home" asp-action="Detail" asp-route-id="@image.Id">
+                        <img src="~/images/@image.ImageUrl" class="img-fluid w-100 image-frame">
+                        <div class="mb-3 fancy-text">
+                        @if (CultureInfo.CurrentCulture.Name == "en-US")
+                        {
+                            @image.TitleEN
+                        }
+                        else
+                        {
+                            @image.TitleMK
+                        }
+                        </div>
+                    </a>
+
+                    <div class="add-to-cart-button">
+                        <button class="btn btn-primary" onclick="addToCart(@image.Id)">@Localizer["Add to Cart"]</button>
+                    </div>
+                </div>
+        }
+    </div>
+
+    <div class="text-center my-4">
+        <a asp-controller="Home" asp-action="CheckOut" class="btn btn-primary">Check Out</a>
+    </div>
+</section>
+
+<script>
+    function addToCart(imageId) {
+        fetch('/Home/AddToCart/' + imageId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val() // Anti-forgery token
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Added to Cart!');
+            } else {
+                alert('Error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>

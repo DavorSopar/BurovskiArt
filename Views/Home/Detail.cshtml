@@ -1,0 +1,103 @@
+﻿@model ArtistPortfolio.Models.Models.Image
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = @Localizer["Детали"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="section my-5 px-2">
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="my-3 text-center border border-0">
+                <div class="zoom-container">
+                    <img src="~/images/@Model.ImageUrl" class="img-fluid img-box-shadow">
+                    <div class="zoom-lens"></div>
+                    <div class="zoom-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6">
+            <div class="my-3 border border-0">
+                @if (CultureInfo.CurrentCulture.Name == "en-US")
+                {
+                        <h5 class="text-start">@Model.TitleEN <small>(@(Model.IsForSale ? "For sale" : "Not for sale"))</small></h5>
+                        <hr />
+                        <div class="detail-body">
+                            <div class="d-flex flex-column">
+                                <span><strong>Format:</strong> @Model.Format cm</span>
+                                <span><strong>Technique:</strong> @Model.TechniqueEN</span>
+                            </div>
+                            <p class="my-4">
+                            @Model.DescEN
+                            </p>
+                        </div>
+                }
+                else
+                {
+                        <h5 class="text-start">@Model.TitleMK <small>(@(Model.IsForSale ? "Се продава" : "Не се продава"))</small></h5>
+                        <hr />
+                        <div class="detail-body">
+                            <div class="d-flex flex-column">
+                                <span><strong>Формат:</strong> @Model.Format цм</span>
+                                <span><strong>Техника:</strong> @Model.TechniqueMK</span>
+                            </div>
+                            <p class="my-4">
+                            @Model.DescMK
+                            </p>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    var zoomContainer = document.querySelector('.zoom-container');
+    var zoomLens = document.querySelector('.zoom-lens');
+    var zoomResult = document.querySelector('.zoom-result');
+    var img = zoomContainer.querySelector('img');
+
+    zoomContainer.addEventListener('mousemove', function (e) {
+        zoomLens.style.visibility = 'visible';
+        zoomResult.style.visibility = 'visible';
+        var pos = getCursorPos(e, zoomContainer);
+
+        var x = pos.x - (zoomLens.offsetWidth / 2);
+        var y = pos.y - (zoomLens.offsetHeight / 2);
+
+        if (x > img.width - zoomLens.offsetWidth) { x = img.width - zoomLens.offsetWidth; }
+        if (x < 0) { x = 0; }
+        if (y > img.height - zoomLens.offsetHeight) { y = img.height - zoomLens.offsetHeight; }
+        if (y < 0) { y = 0; }
+
+        zoomLens.style.left = x + 'px';
+        zoomLens.style.top = y + 'px';
+
+        zoomResult.style.backgroundImage = `url(${img.src})`;
+        var cx = zoomResult.offsetWidth / zoomLens.offsetWidth;
+        var cy = zoomResult.offsetHeight / zoomLens.offsetHeight;
+
+        zoomResult.style.backgroundSize = `${img.width * cx}px ${img.height * cy}px`;
+        zoomResult.style.backgroundPosition = `-${x * cx}px -${y * cy}px`;
+    });
+
+    zoomContainer.addEventListener('mouseleave', function () {
+        zoomLens.style.visibility = 'hidden';
+        zoomResult.style.visibility = 'hidden';
+    });
+
+    function getCursorPos(e, elem) {
+        var a = elem.getBoundingClientRect();
+        var x = e.pageX - a.left;
+        var y = e.pageY - a.top;
+        x = x - window.pageXOffset;
+        y = y - window.pageYOffset;
+        return { x: x, y: y };
+    }
+});
+
+</script>

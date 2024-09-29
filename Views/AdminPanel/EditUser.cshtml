@@ -1,0 +1,48 @@
+﻿@model ArtistPortfolio.Models.Identity.ApplicationUser
+@{
+    ViewData["Title"] = "Админ Панел";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="card shadow botder-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-light">Edit User: @Model.FirstName @Model.LastName</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-md-12">
+                <section>
+                    <form asp-action="EditUser" method="post">
+                        <div class="form-floating mb-3">
+                            <input asp-for="FirstName" class="form-control"/>
+                            <label asp-for="FirstName" class="form-label">First Name: </label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="LastName" class="form-control"/>
+                            <label asp-for="LastName" class="form-label">Last Name: </label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Email" class="form-control"/>
+                            <label asp-for="Email" class="form-label">Email: </label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select name="selectedRoles" class="form-select">
+                                <option disabled selected>-Select Role-</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Customer">Customer</option>
+                                <option value="Company">Company</option>
+                            </select>
+                            <label class="form-label">Roles: </label>
+                        </div>
+                        <button type="submit">Save Changes</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

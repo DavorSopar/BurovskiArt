@@ -1,0 +1,45 @@
+﻿@model ArtistPortfolio.Models.Models.Biography
+
+@{
+    ViewData["Title"] = "Админ - Додади нова биографија";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <h2>Додади биографија</h2>
+    </div>
+    <div class="my-2">
+        <div class="alert alert-info">
+            <i class="fa-solid fa-circle-info me-2"></i> Не додавај нова биографија доколку си во можност да ја измениш постоечката биографија.
+        </div>
+    </div>
+    <hr />
+</div>
+
+<form class="form" asp-action="AddBiography" asp-controller="BiographyDashboard" method="POST" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group mb-3">
+        <label asp-for="BiographyContentMK" class="form-label"><strong>Биографија (македонски):</strong></label>
+        <textarea class="form-control" asp-for="BiographyContentMK" rows="5"></textarea>
+        <span asp-validation-for="BiographyContentMK" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <label asp-for="BiographyContentEN" class="form-label"><strong>Биографија (англиски):</strong></label>
+        <textarea class="form-control" asp-for="BiographyContentEN" rows="5"></textarea>
+        <span asp-validation-for="BiographyContentEN" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="ImageFile" class="form-label"><strong>Избери слика:</strong></label>
+        <input asp-for="ImageFile" class="form-control">
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-danger me-2" asp-controller="BiographyDashboard" asp-action="Index">Назад</a>
+            <button type="submit" class="btn btn-success">Додади</button>
+        </div>
+    </div>
+</form>

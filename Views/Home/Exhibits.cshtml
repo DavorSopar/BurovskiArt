@@ -1,0 +1,44 @@
+﻿@model List<ArtistPortfolio.Models.Models.Image>
+@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = @Localizer["Експонати"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section my-3">
+    <div class="text-center py-4 mb-4">
+        <h3>@Localizer["Експонати"]</h3>
+        @if (CultureInfo.CurrentCulture.Name == "en-US")
+        {
+            <small>These paintings <strong>are not for sale</strong>.</small>
+        }
+        else
+        {
+            <small>Изложените дела <strong>не се на продажба</strong>.</small>
+        }
+    </div>
+
+    <div class="row">
+        @foreach (var image in Model)
+        {
+            <div class="col-md-6 col-sm-6 col-xs-6 text-center">
+                <a class="image-title text-uppercase" asp-controller="Home" asp-action="Detail" asp-route-id="@image.Id">
+                    <img src="~/images/@image.ImageUrl" class="img-fluid w-50">
+                    <div class="mb-3">
+                        @if (CultureInfo.CurrentCulture.Name == "en-US")
+                        {
+                            @image.TitleEN
+                        }
+                        else
+                        {
+                            @image.TitleMK
+                        }
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</section>
